@@ -7,7 +7,7 @@ from streamlit_folium import folium_static
 # st.set_option('server.headless', True)
 
 # Chave de API da OpenWeatherMap (substitua pela sua chave)
-API_KEY = ""
+API_KEY = "a5676ce9dbe81f9ddad2125c4dedb9b6"
 
 def obter_previsao_tempo(cidade):
     endpoint = "http://api.openweathermap.org/data/2.5/weather"
