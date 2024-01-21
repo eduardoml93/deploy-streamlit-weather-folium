@@ -44,7 +44,7 @@ def exibir_mapa(latitude, longitude):
     folium_static(m)
 
 def main():
-    st.title("Aplicativo de Previsão do Tempo e Mapa")
+    st.title("App de Previsão do Tempo e Mapa")
 
     # Inserir o nome da cidade
     cidade = st.text_input("Digite o nome da cidade:")
