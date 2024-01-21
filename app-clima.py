@@ -32,7 +32,7 @@ def exibir_previsao_tempo(dados_clima):
         st.write(f"**País:** {dados_clima['sys']['country']}")
         st.write(f"**Temperatura Atual:** {dados_clima['main']['temp']}°C")
         st.write(f"**Tempo:** {dados_clima['weather'][0]['description'].capitalize()}")
-        return dados_clima
+        return (dados_clima['coord']['lat'], dados_clima['coord']['lon'], dados_clima)
     else:
         st.warning("Insira uma cidade válida.")
         return None
@@ -62,15 +62,12 @@ def main():
     if st.button("Obter Previsão do Tempo"):
         if cidade:
             dados_clima = obter_previsao_tempo(cidade)
-            if dados_clima:
-                coordenadas = exibir_previsao_tempo(dados_clima)
-                exibir_mapa(*coordenadas, dados_clima)
+            coordenadas = exibir_previsao_tempo(dados_clima)
+            if coordenadas:
+                exibir_mapa(*coordenadas)
+
         else:
             st.warning("Insira o nome da cidade para obter a previsão do tempo.")
 
 if __name__ == "__main__":
     main()
-
-
-
-
