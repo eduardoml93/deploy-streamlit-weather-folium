@@ -41,15 +41,21 @@ def exibir_mapa(latitude, longitude, dados_clima):
     st.write("**Mapa da Cidade**")
     m = folium.Map(location=[latitude, longitude], zoom_start=10)
     
-    # Adicione informações sobre o clima no pop-up do marcador
+    # Criar o conteúdo do pop-up sem folium.Popup
     pop_up_content = f"""
     <b>Cidade:</b> {dados_clima['name']}<br>
     <b>País:</b> {dados_clima['sys']['country']}<br>
     <b>Temperatura Atual:</b> {dados_clima['main']['temp']}°C<br>
     <b>Tempo:</b> {dados_clima['weather'][0]['description'].capitalize()}
     """
-    
-    folium.Marker(location=[latitude, longitude], popup=folium.Popup(html=pop_up_content, parse_html=True)).add_to(m)
+
+    # Adicionar o marcador com o conteúdo do pop-up
+    folium.Marker(
+        location=[latitude, longitude],
+        popup=folium.Popup(folium.Html(pop_up_content, script=True)),
+        icon=folium.Icon(color='blue')
+    ).add_to(m)
+
     folium_static(m)
 
 def main():
