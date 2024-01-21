@@ -32,15 +32,24 @@ def exibir_previsao_tempo(dados_clima):
         st.write(f"**País:** {dados_clima['sys']['country']}")
         st.write(f"**Temperatura Atual:** {dados_clima['main']['temp']}°C")
         st.write(f"**Tempo:** {dados_clima['weather'][0]['description'].capitalize()}")
-        return (dados_clima['coord']['lat'], dados_clima['coord']['lon'])
+        return dados_clima
     else:
         st.warning("Insira uma cidade válida.")
         return None
 
-def exibir_mapa(latitude, longitude):
+def exibir_mapa(latitude, longitude, dados_clima):
     st.write("**Mapa da Cidade**")
     m = folium.Map(location=[latitude, longitude], zoom_start=10)
-    folium.Marker(location=[latitude, longitude], popup="Cidade").add_to(m)
+    
+    # Adicione informações sobre o clima no pop-up do marcador
+    pop_up_content = f"""
+    <b>Cidade:</b> {dados_clima['name']}<br>
+    <b>País:</b> {dados_clima['sys']['country']}<br>
+    <b>Temperatura Atual:</b> {dados_clima['main']['temp']}°C<br>
+    <b>Tempo:</b> {dados_clima['weather'][0]['description'].capitalize()}
+    """
+    
+    folium.Marker(location=[latitude, longitude], popup=folium.Popup(html=pop_up_content, parse_html=True)).add_to(m)
     folium_static(m)
 
 def main():
@@ -53,9 +62,9 @@ def main():
     if st.button("Obter Previsão do Tempo"):
         if cidade:
             dados_clima = obter_previsao_tempo(cidade)
-            coordenadas = exibir_previsao_tempo(dados_clima)
-            if coordenadas:
-                exibir_mapa(*coordenadas)
+            if dados_clima:
+                coordenadas = exibir_previsao_tempo(dados_clima)
+                exibir_mapa(*coordenadas, dados_clima)
         else:
             st.warning("Insira o nome da cidade para obter a previsão do tempo.")
 
