@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import folium
+import urllib.parse
 from streamlit_folium import folium_static
 
 # Desativar a observação de arquivos para o Streamlit no Docker
