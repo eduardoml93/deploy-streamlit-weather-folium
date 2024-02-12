@@ -11,10 +11,12 @@ API_KEY = "a5676ce9dbe81f9ddad2125c4dedb9b6"
 
 def obter_previsao_tempo(cidade):
     endpoint = "http://api.openweathermap.org/data/2.5/weather"
+    lang_param = urllib.parse.quote_plus("&lang=pt_br")
     params = {
         "q": cidade,
         "appid": API_KEY,
-        "units": "metric"  # Use "imperial" para Fahrenheit ou "metric" para Celsius
+        "units": "metric",  # Use "imperial" para Fahrenheit ou "metric" para Celsius
+        "extra_param": f"{lang_param}"  # Este é apenas um exemplo de como incluir o parâmetro 'lang'.
     }
 
     response = requests.get(endpoint, params=params)
