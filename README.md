@@ -4,3 +4,8 @@ Deploy successfully on streamlit. App entirely developed in Python using Streaml
 
 
 ![App rodando em emlclima.streamlit.app](appclima.PNG)
+
+
+App atualizado com imagem de background da Internet:
+
+![App rodando em emlclima.streamlit.app](background.PNG)
