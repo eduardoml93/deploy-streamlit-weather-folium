@@ -6,6 +6,20 @@ from streamlit_folium import folium_static
 # Desativar a observação de arquivos para o Streamlit no Docker
 # st.set_option('server.headless', True)
 
+# Set the background image
+background_image = """
+<style>
+[data-testid="stAppViewContainer"] > .main {
+    background-image: url("https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
+    background-position: center;  
+    background-repeat: no-repeat;
+}
+</style>
+"""
+
+st.markdown(background_image, unsafe_allow_html=True)
+
 # Chave de API da OpenWeatherMap (substitua pela sua chave)
 API_KEY = "a5676ce9dbe81f9ddad2125c4dedb9b6"
 
